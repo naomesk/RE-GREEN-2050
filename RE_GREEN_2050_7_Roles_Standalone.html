@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b1826" />
+  <meta name="description" content="RE:GREEN 2050 — a small playable environmental survival and restoration game." />
+  <title>RE:GREEN 2050 — A World Worth Saving</title>
+  <style>:root{color-scheme:dark;--bg:#08121e;--panel:#102334;--border:#315168;--muted:#9fb6c4;--mint:#a7e1b4;--blue:#6ad3ff;--shadow:0 20px 70px #0006}*{box-sizing:border-box}html,body{min-height:100%;margin:0}body{font-family:Nunito,'Trebuchet MS',sans-serif;background:radial-gradient(ellipse at 15% 1%,#1d3549 0%,transparent 34%),radial-gradient(ellipse at 95% 90%,#193942 0%,transparent 40%),var(--bg);color:#f5f8f4;font-size:14px}button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible{outline:2px solid #9ce7d4;outline-offset:3px}a{color:inherit;text-decoration:none}.ambient{position:fixed;z-index:-1;filter:blur(90px);pointer-events:none;opacity:.22}.ambient-one{width:260px;height:260px;left:-85px;top:290px;background:#328c9c}.ambient-two{width:300px;height:300px;right:0;bottom:0;background:#81b285}.app-shell{max-width:1480px;margin:auto;padding:23px 28px 18px}.masthead{display:flex;align-items:center;gap:28px;padding:4px 0 22px;border-bottom:1px solid #47607668}.brand{display:flex;align-items:center;gap:11px;font-size:25px;letter-spacing:-1.5px;font-weight:900;white-space:nowrap}.brand em{font-style:normal;color:#a4e6b8}.brand strong{color:#a5d6f5}.brand-icon{display:grid;place-items:center;width:32px;height:32px;border-radius:12px;background:#9bdcad;color:#144636;transform:rotate(-10deg);font-size:23px}.top-label{margin:auto;font-size:10px;letter-spacing:2.1px;color:#b3c7d6;font-weight:800;white-space:nowrap}.version{color:#7192a3}.pulse-dot{display:inline-block;width:6px;height:6px;border-radius:100%;background:#95eeb7;box-shadow:0 0 13px #89efb9;margin-right:8px}.header-actions{display:flex;gap:10px}.small-btn,.text-btn{border:1px solid #3a5a68;background:#1a3445;color:#e8f7fb;border-radius:11px;padding:9px 14px;font-weight:800;white-space:nowrap}.text-btn{border-color:transparent;background:transparent;color:#a7c7d5}.small-btn:hover,.text-btn:hover{background:#275069}.intro-bar{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:26px 0 22px}.eyebrow{color:#98cbb8;letter-spacing:2.3px;font-size:10px;font-weight:900}.intro-bar h1{font-size:clamp(23px,2.55vw,38px);line-height:1.23;letter-spacing:-1px;margin:8px 0 7px}.intro-bar h1 i{font-style:normal;color:#a5ddb7}.intro-bar p{color:#a7bfcf;margin:0;max-width:620px;font-size:13px}.day-stamp{min-width:215px;background:linear-gradient(140deg,#1b3545,#152632);border:1px solid #355369;border-radius:12px;padding:12px 16px;text-align:right;display:flex;flex-direction:column;gap:2px}.day-stamp span{color:#a4e1c1;font-size:10px;font-weight:900;letter-spacing:2px}.day-stamp b{font-size:13px}.day-stamp small{color:#a3b4be}.layout{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:16px}.game-column{min-width:0}.statbar{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border:1px solid #466578;border-bottom:0;background:#112b3c;border-radius:15px 15px 0 0;padding:13px 10px;gap:4px}.stat{padding:0 9px;border-right:1px solid #375063}.stat:last-child{border:0}.stat-top{display:flex;justify-content:space-between;align-items:center;gap:5px;font-size:11px;font-weight:800;margin:0 0 9px}.stat-top span{white-space:nowrap}.stat-top strong{font-size:12px}.stat.health{--fill:#e77991}.stat.energy{--fill:#edc478}.stat.air{--fill:#8ea7d4}.stat.water{--fill:#69d4f5}.stat.green{--fill:#9ed8aa}.track{height:6px;border-radius:30px;background:#0b1b28;overflow:hidden}.fill{height:100%;width:0;background:var(--fill);border-radius:30px;transition:width .35s ease}.world-frame{position:relative;overflow:hidden;border:1px solid #4c7185;border-radius:0 0 16px 16px;background:#0f1c2c;box-shadow:var(--shadow);isolation:isolate}.world-frame canvas{width:100%;height:auto;aspect-ratio:16/9;display:block;image-rendering:auto;touch-action:none}.world-label{position:absolute;top:14px;left:16px;display:flex;align-items:center;gap:8px;border:1px solid #406078b0;border-radius:11px;padding:9px 12px;background:#102333d9;box-shadow:0 5px 20px #06161f7a;pointer-events:none}.location-pin{font-size:27px;color:#84d9fe}.world-label span:nth-child(2){display:flex;flex-direction:column}.world-label b{font-size:13px}.world-label small{font-size:10px;color:#b7c6d5}.mini-map{position:absolute;right:16px;top:14px;width:132px;height:105px;border-radius:11px;background:linear-gradient(120deg,#182a39e8,#254858e8);border:1px solid #60849a;box-shadow:0 8px 24px #0008;overflow:hidden;pointer-events:none}.mini-title{position:absolute;top:7px;left:9px;color:#e4f0ea;font-size:8px;letter-spacing:1px;font-weight:900;z-index:2}.mini-road{position:absolute;top:48px;left:0;right:0;height:17px;background:#77817a;opacity:.65}.mini-river{position:absolute;bottom:0;width:100%;height:24%;background:#27718d;transform:skewY(-3deg)}.mini-player,.mini-pin{position:absolute;width:9px;height:9px;border-radius:50%;border:2px solid #fff;background:#c6fba8;box-shadow:0 0 9px #d1ffb8;z-index:2;transform:translate(-50%,-50%)}.mini-pin{width:7px;height:7px;border:0}.mini-blue{left:76%;top:68%;background:#75d3ff;box-shadow:0 0 12px #75d3ff}.mini-orange{left:84%;top:38%;background:#f1ca7d;box-shadow:0 0 12px #f1ca7d}.mini-red{left:18%;top:38%;background:#fc8986;box-shadow:0 0 12px #fc8986}.echo-banner{position:absolute;bottom:16px;left:16px;right:16px;display:flex;align-items:center;gap:13px;max-width:580px;padding:10px 13px 10px 10px;border-radius:15px;background:linear-gradient(110deg,#0a2640eb,#143a4fe8);border:1px solid #68bad9c4;box-shadow:0 10px 32px #0009;pointer-events:none}.echo-face{min-width:49px;width:49px;height:49px;display:grid;place-items:center;border-radius:18px;background:#aff0fa;border:4px solid #5cd2ec;color:#225f7b;box-shadow:0 0 16px #70e5ff88}.echo-face span{font-size:16px;font-weight:900}.echo-name{font-weight:900;font-size:11px;color:#9ddff0;letter-spacing:1.5px}.echo-name small{font-size:9px;letter-spacing:1px;color:#9cbcc9}.echo-banner p{font-size:12px;line-height:1.38;margin:3px 0 0;color:#f0f8f9}.near-prompt{position:absolute;top:30%;left:50%;transform:translateX(-50%);background:#132e45f2;border:1px solid #75d2f9;color:#fff;border-radius:11px;padding:9px 13px;box-shadow:0 10px 30px #07121eaa;font-weight:900;font-size:11px;white-space:nowrap;pointer-events:none}.hidden{display:none!important}.toast{position:absolute;left:50%;top:24%;transform:translateX(-50%);background:#2e5361ed;color:white;border:1px solid #9cc7d8;border-radius:10px;padding:11px 16px;z-index:15;box-shadow:0 10px 30px #0009;min-width:230px;text-align:center;font-weight:800}.game-overlay{position:absolute;inset:0;background:#061321a8;backdrop-filter:blur(3px);display:flex;justify-content:center;align-items:center;z-index:10;padding:17px;overflow-y:auto}.game-overlay.hidden{display:none}.modal{width:min(530px,100%);padding:25px 30px;max-height:100%;overflow-y:auto;border:1px solid #6795a1;border-radius:23px;background:linear-gradient(150deg,#15364b,#102333 65%,#183b3e);box-shadow:0 20px 75px #000b;text-align:center}.modal.small-modal{width:min(460px,100%)}.modal .seed{font-size:30px;color:#a9e6b7;line-height:1;margin-bottom:4px}.modal .chapter{letter-spacing:2.8px;font-size:10px;color:#9ce0b5;font-weight:900}.modal h2{font-size:clamp(24px,4vw,35px);margin:8px 0 8px;line-height:1.1;letter-spacing:-.9px}.modal h2 em{color:#a7eab9;font-style:normal}.modal p{color:#b9cdd4;line-height:1.53;font-size:13px;margin:9px 0 18px}.modal .subtitle{color:#a6dae5}.modal .pill-row{display:flex;justify-content:center;gap:7px;flex-wrap:wrap;margin:18px 0}.mini-pill{border:1px solid #567586;background:#1c3b4d;color:#afdbda;border-radius:100px;font-size:10px;font-weight:900;padding:6px 10px}.primary-btn,.secondary-btn{padding:11px 18px;border-radius:12px;border:0;background:#aee6b1;color:#173c35;font-weight:900;box-shadow:0 6px 0 #5b9278;transition:transform .1s;min-width:160px}.primary-btn:hover{background:#d0f4c2;transform:translateY(-1px)}.secondary-btn{background:#26495c;color:#c8eef0;border:1px solid #5887a0;box-shadow:none;min-width:0}.secondary-btn:hover{background:#35697a}.button-row{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:18px}.role-choices{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}.role-option{border:1px solid #597889;border-radius:13px;padding:12px 11px;background:#193649;color:#f0fafa;display:flex;align-items:center;flex-direction:column;gap:2px;min-width:0}.role-option.active{border-color:#b5edbf;box-shadow:0 0 0 2px #a6e9b536;background:#244f54}.role-option .emoji{font-size:36px;line-height:1.15}.role-option strong{font-size:16px}.role-option small{color:#bad0d8;max-width:175px;line-height:1.25}.difficulty{display:flex;align-items:center;justify-content:center;gap:9px;flex-wrap:wrap}.difficulty button{border:1px solid #456b7c;color:#b0c4d2;border-radius:9px;background:#142c3e;padding:7px 13px;font-weight:800;font-size:11px}.difficulty button.active{background:#a5d7c0;color:#154134;border-color:#a5d7c0}.modal ul{text-align:left;font-size:13px;line-height:1.6;color:#d6e9ea;padding-left:22px}.modal .choice-list{display:grid;gap:9px;text-align:left;margin-top:15px}.choice-btn{width:100%;border:1px solid #4f7c8d;border-radius:12px;background:#193a4a;color:white;text-align:left;padding:12px 15px;display:grid;gap:5px}.choice-btn:hover{background:#23516b;border-color:#9ac8ce}.choice-btn strong{font-size:12px}.choice-btn span{font-size:11px;color:#b7ccdb}.result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:15px 0}.result-box{padding:11px 4px;background:#1a3d4b;border:1px solid #497181;border-radius:10px}.result-box b{font-size:19px;color:#9fe1b3}.result-box small{display:block;font-size:9px;color:#c7d8da;margin-top:3px}.modal .explain{padding:12px;background:#24505a;border-left:3px solid #a8eab6;color:#e0f6ef;text-align:left;font-size:12px;line-height:1.4;border-radius:6px}.under-world{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 3px;color:#b2c6d5}.controls-help{display:flex;align-items:center;gap:5px;font-size:11px;flex-wrap:wrap}.keycaps{display:flex;gap:2px}kbd{display:inline-flex;justify-content:center;align-items:center;min-width:20px;height:21px;padding:0 3px;border:1px solid #477084;border-bottom-width:3px;border-radius:5px;color:#f2f9fa;background:#1e3a4c;font-size:11px;font-family:inherit;font-weight:900}.separator{color:#467787;margin:0 4px}.mission-hint{color:#a6e6bb;font-weight:900;font-size:11px;text-align:right}.sidebar{display:grid;gap:14px;align-content:start}.side-card{background:linear-gradient(150deg,#152f40,#102231);border:1px solid #426477;border-radius:16px;padding:16px;box-shadow:0 8px 24px #07111c77}.side-heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px;color:#c6e4ec}.side-label{letter-spacing:2px;font-weight:900;font-size:10px}.tag{font-size:9px;letter-spacing:1px;border-radius:20px;padding:5px 8px;background:#2b6254;color:#a5eec7;font-weight:900}.mission-art{min-height:102px;border-radius:12px;background:radial-gradient(circle at 22% 51%,#2b9ac372,#18435a 38%,#102e42);display:flex;align-items:center;gap:11px;padding:13px;border:1px solid #396879}.mission-glyph{font-size:40px;filter:drop-shadow(0 0 11px #79d3f6)}.mission-art div{display:flex;flex-direction:column}.mission-art div span{font-size:10px;color:#a8d0e6;font-weight:800}.mission-art div strong{font-size:20px;letter-spacing:-.5px}.side-description{font-size:11px;color:#aec6d2;line-height:1.52}.task-list{display:grid;gap:11px;margin:13px 0 2px}.task-item{display:flex;align-items:flex-start;gap:9px;font-size:12px;color:#aec8d2}.task-item .check{display:grid;place-items:center;flex:none;width:20px;height:20px;border:1px solid #577c8f;border-radius:7px;color:#9dcfda;font-size:11px}.task-item.complete{color:#d5e7e2}.task-item.complete .check{background:#8fdab4;color:#174c42}.signal-row{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid #36516466}.signal-row:last-child{border-bottom:0}.signal-swatch{width:13px;height:13px;flex:none;display:block;border-radius:50%}.signal-swatch.blue{background:#70d4f9;box-shadow:0 0 15px #78d5ff}.signal-swatch.amber{background:#edc46d;box-shadow:0 0 15px #e7bf6d}.signal-swatch.red{background:#e8808a;box-shadow:0 0 15px #e8808a}.signal-row div{display:flex;flex:1;flex-direction:column;gap:2px}.signal-row b{font-size:12px}.signal-row small{font-size:10px;color:#9ab5c2}.signal-row>span:last-child{color:#7d9cac;font-weight:900}.role-line{display:flex;align-items:center;gap:12px;margin:5px 0 13px}.role-avatar{display:grid;place-items:center;width:42px;height:42px;border:1px solid #638d9e;border-radius:12px;background:#315467;font-size:24px}.role-line div:last-child{display:flex;flex-direction:column;gap:2px}.role-line small{color:#93b2c4;font-size:10px}.role-line b{font-size:15px}.community-row{display:flex;justify-content:space-between;padding:8px 0;border-top:1px solid #335163;color:#aec6d2;font-size:11px}.community-row b{color:#e3f5eb}.impact-note{color:#7e9cac;font-size:10px;line-height:1.48}.touch-controls{display:none;justify-content:space-between;align-items:center;padding:9px 0}.dpad{width:135px;height:100px;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:3px}.dpad button,.interact-touch{touch-action:none;user-select:none;border:1px solid #7199a2;border-radius:10px;color:#e5ffef;background:#254b60;font-weight:900}.dpad button:active,.interact-touch:active{background:#57a28b}.dpad .up{grid-column:2;grid-row:1}.dpad .left{grid-column:1;grid-row:2}.dpad .down{grid-column:2;grid-row:3}.dpad .right{grid-column:3;grid-row:2}.interact-touch{padding:14px 17px;background:#8ccfb0;color:#204539}footer{display:flex;justify-content:space-between;gap:15px;color:#88a3af;letter-spacing:1.3px;font-size:9px;font-weight:800;padding:25px 3px 6px}footer span{white-space:nowrap}@media(max-width:1240px){.top-label{display:none}.masthead{justify-content:space-between}.layout{grid-template-columns:1fr}.sidebar{grid-template-columns:repeat(3,1fr)}.side-card{min-width:0}.stat-top{font-size:11px}}@media(max-width:800px){.app-shell{padding:11px 12px}.brand{font-size:20px}.masthead{padding-bottom:12px}.header-actions{gap:2px}.small-btn,.text-btn{padding:6px 8px;font-size:10px}.intro-bar{padding:17px 0 14px}.intro-bar h1{font-size:24px}.day-stamp{display:none}.intro-bar p{font-size:11px}.statbar{padding:11px 5px;gap:0}.stat{padding:0 4px}.stat-top{display:block}.stat-top span{display:block;font-size:9px}.stat-top strong{font-size:10px}.sidebar{grid-template-columns:1fr 1fr}.role-card{grid-column:1/-1}.world-label{left:6px;top:6px;padding:5px 8px}.world-label b{font-size:10px}.world-label small{font-size:8px}.location-pin{font-size:18px}.mini-map{transform:scale(.8);transform-origin:top right;top:5px;right:5px}.echo-banner{bottom:6px;left:6px;right:6px;padding:5px 7px;gap:6px;max-width:95%;border-radius:9px}.echo-face{width:28px;height:28px;min-width:28px;border-width:2px;border-radius:10px}.echo-face span{font-size:9px}.echo-name{font-size:8px}.echo-name small{display:none}.echo-banner p{font-size:9px;margin-top:0;line-height:1.25}.near-prompt{top:35%;font-size:9px;padding:5px 7px}.under-world{align-items:flex-start;flex-direction:column;gap:6px}.touch-controls{display:flex}.modal{padding:15px 16px;border-radius:14px}.modal h2{font-size:24px}.modal p{font-size:11px;margin:7px 0 10px}.modal .chapter{font-size:8px}.modal .pill-row{margin:9px 0}.role-option .emoji{font-size:26px}.role-option strong{font-size:12px}.role-option small{font-size:10px}.role-choices{margin:8px 0}.button-row{margin-top:10px}.modal .choice-list{gap:5px;margin-top:9px}.choice-btn{padding:7px 10px}.modal .explain{font-size:10px;padding:7px}.result-grid{margin:8px 0}.result-box{padding:7px 4px}.result-box b{font-size:15px}footer span:nth-child(2){display:none}}@media(max-width:480px){.sidebar{grid-template-columns:1fr}.role-card{grid-column:auto}.game-overlay{padding:7px}.modal{max-height:100%;padding:12px}.modal .seed{font-size:22px}.modal h2{font-size:21px}.modal .choice-list{gap:5px}.mini-pill{font-size:8px;padding:4px 6px}.primary-btn,.secondary-btn{min-width:0;padding:8px 12px;font-size:11px}.stat-top span{font-size:7px}.stat-top strong{font-size:9px}.world-label small{display:none}.mini-map{transform:scale(.64)}.echo-banner{max-width:92%}.echo-face{display:none}.controls-help{font-size:9px}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0s!important;transition-duration:0s!important}}
+/* Keep the dialog readable on phones, even when the canvas itself is short. */
+@media(max-width:800px){.game-overlay{position:fixed;inset:0;z-index:100;background:#061321ee;padding:20px}.modal{max-height:90vh;width:min(520px,100%);padding:20px 22px}.modal p{font-size:12px}.modal .choice-btn{padding:11px 13px}.modal .chapter{font-size:10px}}
+/* CUTE EDITION — soft storybook UI around a dramatic, climate-damaged world */
+:root{--mint:#b4f2bc;--cream:#fff1d7;--pink:#f8bccc;--sky:#a3e0f5;--plum:#ae9ad5}
+body{background:radial-gradient(circle at 10% 3%,#23425a 0,transparent 35%),radial-gradient(circle at 90% 55%,#2b4656 0,transparent 39%),#0c1827}
+.app-shell{max-width:1510px}
+.brand{letter-spacing:-.8px}
+.brand-icon{background:#ade6b7!important;color:#30564f!important;border:3px solid #d6f8d2;border-radius:15px;transform:rotate(-9deg);box-shadow:0 4px 0 #538f7a,0 0 27px #9be3ab22}
+.intro-bar h1{font-weight:900;letter-spacing:-1.2px}
+.intro-bar h1 i{font-style:normal;color:#aee5c0;text-shadow:0 0 25px #67dcac33}
+.day-stamp{background:#20384b!important;border:1px solid #5c7c85!important;transform:rotate(1deg);border-radius:17px!important}
+.statbar{background:linear-gradient(110deg,#1a3547,#233a4b 60%,#203c3d)!important}
+.stat{position:relative}.stat .fill{border-radius:50px}
+.stat.health .fill{background:#e88a9f!important}.stat.energy .fill{background:#f4cf7e!important}.stat.air .fill{background:#9ebbe9!important}.stat.water .fill{background:#81d6e6!important}.stat.green .fill{background:#9bdfb1!important}
+.world-frame{border-radius:20px!important;overflow:hidden;border:2px solid #87bbbe75!important;box-shadow:0 18px 42px #020d1688,0 0 35px #68cfc51a!important}
+.world-label,.mini-map,.echo-banner{border-radius:14px!important}
+.echo-banner{border:2px solid #91e4df8c!important;box-shadow:0 7px 21px #00111f88;background:linear-gradient(110deg,#1e5265ee,#14425beb)!important}
+.echo-face{border-radius:19px!important;background:radial-gradient(circle at 35% 28%,#eafff1,#73d4dc)!important;border:3px solid #c8fff2!important;transform:rotate(-8deg)}
+.echo-face span{color:#2e6172!important}
+.side-card{border-radius:21px!important;background:linear-gradient(140deg,#1b3545,#122b3b 68%,#1a3542)!important;border:1px solid #688f938f!important;box-shadow:0 8px 0 #08182366,0 13px 25px #0004!important}
+.mission-card{position:relative}.mission-card::before{content:'✿';position:absolute;right:20px;top:52px;color:#c6e9a42a;font-size:46px;transform:rotate(12deg);pointer-events:none}
+.mission-art{background:radial-gradient(circle at 20% 40%,#88e2ec33,#224a58 55%,#163649)!important;border:1px solid #75afb2!important;border-radius:16px!important}
+.mission-glyph{filter:drop-shadow(0 3px 3px #072536)!important}
+.signal-swatch.mint{background:#a7eca8;box-shadow:0 0 15px #99ebb3}
+.role-avatar{background:linear-gradient(145deg,#9ed8d1,#4e888e)!important;border:2px solid #bfeae1!important;border-radius:16px!important;color:#254f51!important}
+.news-card{background:linear-gradient(135deg,#223a45,#1c3d46)!important}
+.news-headline{font-size:14px;color:#f7eacb;font-weight:900;line-height:1.35;margin:6px 0 8px}
+.news-signature{letter-spacing:1.1px;color:#8cbab5;font-size:9px;font-weight:900;margin-top:13px}
+.game-overlay{background:radial-gradient(circle,#0d2131bd,#07121be8)}
+.modal{background:radial-gradient(circle at 50% 0%,#365762,#193848 45%,#152b3d 85%)!important;border:2px solid #9acbbc!important;border-radius:27px!important;box-shadow:0 13px 0 #0a1b2b,0 25px 80px #000d!important;position:relative}
+.modal::before{content:'✧';position:absolute;top:8px;right:22px;color:#b5ecd2;font-size:26px;opacity:.72}
+.modal .seed{font-size:38px;filter:drop-shadow(0 4px 10px #aef5bc55);margin-bottom:6px}
+.modal h2{letter-spacing:-1.3px}.modal h2 em{color:#baf2ba!important}
+.modal .subtitle{color:#f6dcb9!important;font-size:14px}
+.role-option{border-radius:19px!important;border:2px solid #668f99!important;background:linear-gradient(140deg,#25445a,#224655)!important;box-shadow:0 5px 0 #132c39;transition:transform .12s,background .12s}
+.role-option:hover{transform:translateY(-3px)}.role-option.active{border-color:#bbeabc!important;background:#355d5a!important;box-shadow:0 5px 0 #5b9a81,0 0 14px #c8f5b344!important}
+.role-option .emoji{filter:drop-shadow(0 4px 0 #294e5d);font-size:40px!important}
+.difficulty button,.choice-btn{border-radius:13px!important}
+.difficulty button.active{box-shadow:0 3px 0 #5f9e87}
+.primary-btn{background:#b7edaa!important;color:#255541!important;border:2px solid #e8ffda!important;border-radius:15px!important;box-shadow:0 5px 0 #639974!important}
+.primary-btn:hover{background:#d8ffc3!important;transform:translateY(-2px)}
+.secondary-btn{border-radius:15px!important}
+.choice-btn{border:1.5px solid #709ea6!important;background:#294a5b!important;transition:transform .12s}
+.choice-btn:hover:not(:disabled){transform:translateY(-2px);background:#315a64!important;border-color:#c2ecdc!important}
+.choice-btn:disabled{opacity:.42;cursor:not-allowed;filter:grayscale(.7)}
+.choice-btn strong{display:flex;gap:8px;align-items:center;justify-content:space-between}
+.choice-btn .credit{white-space:nowrap;color:#ffdfa0;font-size:10px}
+.choice-btn small{color:#ffd7a6}
+.result-box{background:#275351!important;border:1px solid #76b9a9!important;border-radius:14px!important}
+.modal .micro-note{font-size:10px;color:#abc7ce;margin:12px 0 0;line-height:1.4}
+.tag.open{background:#2d644e;color:#d3f6d5}
+.toast{background:#28565a!important;color:#f3fff8!important;border:1px solid #8ccdb7;border-radius:13px!important}
+.mini-pin.complete{background:#b4f3ae!important;box-shadow:0 0 15px #aceda5!important}
+.mini-green{background:#aaeba6!important;top:51%!important;left:52%!important;box-shadow:0 0 9px #a2f5af!important}
+@media(max-width:800px){.modal{border-radius:20px!important}.role-option .emoji{font-size:29px!important}.news-card{grid-column:1/-1}.statbar .stat-top span{letter-spacing:-.2px}}
+
+/* HACKATHON MULTI-ROLE EDITION — responsive selection for seven actual playable roles */
+.role-select-modal{max-width:680px!important}
+.role-levels{gap:7px!important;margin:11px 0 8px}
+.role-levels button{flex:1;min-width:130px;padding:10px 8px!important;font-size:11px!important}
+.role-choices.expanded-roles{grid-template-columns:repeat(auto-fit,minmax(138px,1fr));gap:10px;max-width:610px;margin:10px auto 8px}
+.expanded-roles .role-option{min-height:112px;padding:11px 8px;justify-content:center;cursor:pointer}
+.expanded-roles .role-option .emoji{font-size:33px!important}
+.expanded-roles .role-option strong{font-size:13px;line-height:1.25}
+.expanded-roles .role-option small{font-size:10px;line-height:1.3}
+@media(max-width:800px){.role-select-modal{max-height:93dvh!important;overflow-y:auto!important}.role-choices.expanded-roles{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.expanded-roles .role-option{min-height:91px;padding:8px}.expanded-roles .role-option .emoji{font-size:24px!important}.role-levels button{min-width:85px;padding:8px 4px!important}}
+@media(max-width:370px){.role-levels button{font-size:9px!important}}
+
+/* The selection is a full-viewport dialog so four roles and the start button are never cut off by the game canvas. */
+body.role-select-active .game-overlay{position:fixed!important;inset:0!important;z-index:200!important;display:flex!important;align-items:center!important;justify-content:center!important;overflow:auto!important;background:#06121ded!important;padding:18px!important}
+body.role-select-active .role-select-modal{max-width:680px!important;width:100%!important;max-height:calc(100dvh - 36px)!important;overflow-y:auto!important;overscroll-behavior:contain!important}
+@media(max-width:600px){body.role-select-active .game-overlay{padding:8px!important}body.role-select-active .role-select-modal{max-height:calc(100dvh - 16px)!important}}
+</style>
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <main class="app-shell">
+    <header class="masthead">
+      <a class="brand" href="#" aria-label="RE:GREEN 2050 Home" id="logoLink"><span class="brand-icon">✳</span><span>RE:<em>GREEN</em> <strong>2050</strong></span></a>
+      <div class="top-label"><span class="pulse-dot"></span> A WORLD WORTH SAVING <span class="version">/ COZY CLIMATE ADVENTURE</span></div>
+      <div class="header-actions"><button id="instructionsBtn" class="text-btn" type="button">? How to play</button><button id="resetBtn" class="small-btn" type="button">↻ Restart</button></div>
+    </header>
+    <section class="intro-bar" aria-label="Game premise">
+      <div><span class="eyebrow">LITTLE LIGHTS / YEAR 2050</span><h1>The city is fading. <i>You can bring it back.</i></h1><p>Explore a climate-damaged future, follow the lights, and make choices that help your community recover.</p></div>
+      <div class="day-stamp"><span>CHAPTERS 01–03</span><b>FOLLOW THE LITTLE LIGHTS</b><small>3 playable missions · 1 shared city</small></div>
+    </section>
+    <section class="layout">
+      <div class="game-column">
+        <div class="statbar" id="statbar">
+          <div class="stat health"><div class="stat-top"><span>♥ Health</span><strong id="healthText">80%</strong></div><div class="track"><div id="healthBar" class="fill"></div></div></div>
+          <div class="stat energy"><div class="stat-top"><span>ϟ Energy</span><strong id="energyText">70%</strong></div><div class="track"><div id="energyBar" class="fill"></div></div></div>
+          <div class="stat air"><div class="stat-top"><span>≋ Air quality</span><strong id="airText">30%</strong></div><div class="track"><div id="airBar" class="fill"></div></div></div>
+          <div class="stat water"><div class="stat-top"><span>◉ Water safety</span><strong id="waterText">25%</strong></div><div class="track"><div id="waterBar" class="fill"></div></div></div>
+          <div class="stat green"><div class="stat-top"><span>✿ City recovery</span><strong id="recoveryText">10%</strong></div><div class="track"><div id="recoveryBar" class="fill"></div></div></div>
+        </div>
+        <div class="world-frame" id="worldFrame">
+          <canvas id="world" width="960" height="540" aria-label="Walkable city map where a character explores environmental missions">Your browser needs canvas support.</canvas>
+          <div class="world-label"><span class="location-pin">⌖</span><span><b>Riverside, 2050</b><small id="weatherLabel">Low light · polluted water</small></span></div>
+          <div class="mini-map" aria-label="Mini map"><div class="mini-title">◈ AREA MAP</div><div class="mini-road"></div><div class="mini-river"></div><div id="miniPlayer" class="mini-player"></div><div class="mini-pin mini-blue" title="River mission"></div><div class="mini-pin mini-orange" title="Industrial district: playable mission"></div><div class="mini-pin mini-red" title="Storm risk mission"></div><div class="mini-pin mini-green" title="Safe rest garden"></div></div>
+          <div id="nearPrompt" class="near-prompt hidden">Press <kbd>E</kbd> to interact</div>
+          <div class="echo-banner" id="echoBanner"><div class="echo-face"><span>◕‿◕</span></div><div><span class="echo-name">✦ ECHO <small>/ YOUR CLIMATE GUIDE</small></span><p id="echoText">Even the smallest light can lead us somewhere important. Find the blue beacon near the water.</p></div></div>
+          <div id="gameOverlay" class="game-overlay" aria-live="polite"></div>
+          <div id="toast" class="toast hidden" role="status"></div>
+        </div>
+        <div class="under-world">
+          <div class="controls-help"><span class="keycaps"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></span><span>Move</span><span class="separator">•</span><kbd>↑</kbd><kbd>←</kbd><kbd>↓</kbd><kbd>→</kbd><span>or arrow keys</span><span class="separator">•</span><kbd>E</kbd><span>Interact</span></div>
+          <div class="mission-hint" id="missionHint">✦ Follow the blue light to start</div>
+        </div>
+        <div class="touch-controls" id="touchControls" aria-label="Mobile game controls">
+          <div class="dpad"><button class="up" data-dir="up" aria-label="Move up">▲</button><button class="left" data-dir="left" aria-label="Move left">◀</button><button class="down" data-dir="down" aria-label="Move down">▼</button><button class="right" data-dir="right" aria-label="Move right">▶</button></div>
+          <button class="interact-touch" id="interactTouch">✦ INTERACT</button>
+        </div>
+      </div>
+      <aside class="sidebar" aria-label="Mission information">
+        <section class="side-card mission-card">
+          <div class="side-heading"><span class="side-label">YOUR CURRENT QUEST</span><span class="tag open" id="missionStatus">✦ AVAILABLE</span></div>
+          <div class="mission-art" aria-hidden="true"><span class="mission-glyph" id="missionEmoji">💧</span><div><span id="missionZone">01 / RIVERSIDE</span><strong id="missionTitle">Save the River</strong></div></div>
+          <p class="side-description" id="missionDescription">Discover three climate missions by following their glowing lights. Start with the river or choose another zone.</p>
+          <div class="task-list" id="taskList"></div>
+        </section>
+        <section class="side-card">
+          <div class="side-heading"><span class="side-label">CITY SIGNALS</span><span class="signal-icon">⌁</span></div>
+          <div class="signal-row"><span class="signal-swatch blue"></span><div><b>Blue light</b><small>River pollution · playable</small></div><span>↗</span></div>
+          <div class="signal-row"><span class="signal-swatch amber"></span><div><b>Yellow light</b><small>Air & energy · playable</small></div><span>↗</span></div>
+          <div class="signal-row"><span class="signal-swatch red"></span><div><b>Red light</b><small>Flood risk · playable</small></div><span>↗</span></div><div class="signal-row"><span class="signal-swatch mint"></span><div><b>Green light</b><small>Safe garden · rest & recover</small></div><span>♥</span></div>
+        </section>
+        <section class="side-card role-card"><div class="side-heading"><span class="side-label">YOUR IMPACT</span><span>✳</span></div><div class="role-line"><div class="role-avatar" id="roleAvatar">?</div><div><small id="roleDetail">Choose a profession</small><b id="roleName">Awaiting player</b></div></div><div class="community-row"><span>Community awareness</span><b id="awarenessText">10%</b></div><div class="community-row"><span>Community trust</span><b id="trustText">50%</b></div><div class="community-row"><span>City resources</span><b id="fundsText">75 credits</b></div><div class="community-row"><span>Storm resilience</span><b id="resilienceText">20%</b></div><p class="impact-note">Fictional educational game indicators, not scientific climate or health predictions.</p></section>
+        <section class="side-card news-card"><div class="side-heading"><span class="side-label">📮 LITTLE CITY NEWS</span><span class="signal-icon">✧</span></div><p class="news-headline" id="newsHeadline">A quiet city awaits its helpers</p><p class="side-description" id="newsBody">Fictional neighbors are waiting for you to take the first step.</p><div class="news-signature">LOCAL COMMUNITY BOARD · NPC SIMULATION</div></section>
+      </aside>
+    </section>
+    <footer>✳ RE:GREEN 2050 <span>EXPLORE • UNDERSTAND • TAKE ACTION • RESTORE</span> <span>Hackathon demo · 7 playable roles · ECHO dialogue is scripted · All scores are fictional</span></footer>
+  </main>
+  <script>/* RE:GREEN 2050 — Cute Edition. Offline playable hackathon competition prototype.
+   All city and health percentages are fictional educational gameplay scores.
+   ECHO is a scripted companion, not a live generative-AI API. */
+'use strict';
+(() => {
+  const $=id=>document.getElementById(id);
+  const canvas=$('world'), ctx=canvas.getContext('2d'), overlay=$('gameOverlay');
+  const W=960,H=540,keys=new Set(),touchKeys=new Set();
+  const clamp=(v,a=0,b=100)=>Math.max(a,Math.min(b,v));
+  const dist=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
+  const beacons=[
+    {x:728,y:346,type:'river',color:'#6ad6ff',icon:'♥'},
+    {x:814,y:278,type:'air',color:'#ffcb75',icon:'ϟ'},
+    {x:151,y:288,type:'storm',color:'#ff8f9f',icon:'!'},
+    {x:524,y:316,type:'garden',color:'#a6ed9b',icon:'✿'}
+  ];
+  const zones={
+    river:{name:'Save the River',zone:'01 / RIVERSIDE',emoji:'💧',color:'#6ad6ff',intro:'This river used to support wildlife. Now waste and polluted runoff threaten the neighborhood. Let’s investigate before choosing a lasting solution.',clueIntro:'Find three clues: plastic accumulation, a damaged outlet, and struggling riverside plants.',actionIntro:'You have identified the pollution. Collect three pieces of litter to improve the riverbank before making a bigger decision.',actionVerb:'Collect',actionsName:'litter items',metric:'water',stepGain:2,
+      clues:[{x:311,y:348,name:'Plastic accumulation',info:'Litter harms riverside wildlife; stopping waste at its source matters as well.'},{x:866,y:370,name:'Polluted drainage',info:'Contaminated runoff and poorly treated wastewater can damage aquatic ecosystems.'},{x:143,y:366,name:'Damaged plants',info:'Healthy riverbank plants support ecosystems and help stabilize soil.'}],
+      actions:[{x:264,y:384,name:'Bottle'},{x:549,y:382,name:'Cup'},{x:680,y:380,name:'Plastic bag'}],
+      decisions:{
+        journalist:[
+          {title:'Publish a verified investigation',sub:'Check sources, speak to residents, and organize an informed response.',cost:21,water:15,awareness:24,trust:19,recovery:23,health:5,feedback:'Accurate reporting builds trust and prompts coordinated action, but infrastructure improvements still take time.'},
+          {title:'Launch a neighborhood recycling campaign',sub:'Encourage citizens to reduce and separate waste.',cost:12,water:9,awareness:19,trust:10,recovery:16,feedback:'The campaign encourages better habits but does not address contaminated wastewater.'},
+          {title:'Share an unverified dramatic headline',sub:'Gain attention without checking whether claims are accurate.',cost:2,water:0,awareness:9,trust:-19,recovery:5,feedback:'The post spreads quickly but weakens public trust. Climate communication needs evidence.'}
+        ],
+        engineer:[
+          {title:'Improve wastewater treatment',sub:'Upgrade polluted drainage and treatment systems.',cost:34,water:30,awareness:5,trust:16,recovery:26,health:7,feedback:'Addressing wastewater sources can bring lasting improvements, but infrastructure requires resources and time.'},
+          {title:'Install a floating litter barrier',sub:'Catch floating trash before it moves downstream.',cost:14,water:14,awareness:6,trust:8,recovery:17,feedback:'A barrier catches visible waste but cannot remove dissolved pollutants.'},
+          {title:'Build only a decorative garden',sub:'Improve appearances without solving water contamination.',cost:9,water:3,awareness:8,trust:0,recovery:9,feedback:'Plants are valuable, but a garden alone cannot make polluted water safe.'}
+        ]},
+      news:{journalist:'Local residents read a verified riverside report and join the cleanup effort.',engineer:'Engineers begin practical improvements along the riverbank and drainage area.'}
+    },
+    air:{name:'Clear the Air',zone:'02 / INDUSTRIAL',emoji:'🌬️',color:'#ffcb75',intro:'The industrial corridor has smoky air, inefficient machines, and heavy traffic. Let’s find what can be improved.',clueIntro:'Inspect an exhaust outlet, a busy roadway, and an inefficient building.',actionIntro:'Set up three simple air-quality monitoring points. Measurements help people understand where action is needed.',actionVerb:'Install',actionsName:'air sensors',metric:'air',stepGain:2,
+      clues:[{x:718,y:313,name:'Factory emissions',info:'Fossil-fuel combustion can contribute to both air pollution and greenhouse gas emissions.'},{x:898,y:311,name:'Traffic hotspot',info:'Vehicle exhaust affects local air; cleaner transportation can help.'},{x:610,y:329,name:'Old energy system',info:'Reducing energy waste can lower fuel consumption and related emissions.'}],
+      actions:[{x:667,y:369,name:'Sensor A'},{x:807,y:365,name:'Sensor B'},{x:917,y:373,name:'Sensor C'}],
+      decisions:{
+        journalist:[
+          {title:'Publish verified clean-air findings',sub:'Compare observations and explain cleaner commuting options.',cost:19,air:23,awareness:26,trust:20,recovery:23,feedback:'Verified reporting helps residents and businesses make informed choices and request systemic improvements.'},
+          {title:'Organize a car-free awareness day',sub:'Invite residents to try walking, transit, and cycling.',cost:11,air:12,awareness:16,trust:11,recovery:16,feedback:'A campaign can encourage sustainable habits, though ongoing transport policy matters too.'},
+          {title:'Claim all factories will close tomorrow',sub:'Post an alarming claim without evidence.',cost:2,air:1,awareness:8,trust:-18,recovery:5,feedback:'Exaggerated claims reduce trust. Accurate communication is more useful in the long term.'}
+        ],
+        engineer:[
+          {title:'Retrofit inefficient factory equipment',sub:'Reduce fuel waste and improve pollution-control systems.',cost:36,air:30,awareness:6,trust:17,recovery:26,feedback:'Better efficiency and pollution controls can reduce emissions, although upgrades cost money.'},
+          {title:'Improve electric bus infrastructure',sub:'Help residents move with lower-emission transportation.',cost:23,air:19,awareness:9,trust:11,recovery:20,feedback:'Cleaner transit can reduce traffic-related pollution, but benefits depend on usage and the power source.'},
+          {title:'Paint over dirty factory walls',sub:'Make buildings look nicer without changing emissions.',cost:7,air:2,awareness:3,trust:0,recovery:7,feedback:'Fresh paint looks welcoming but does not reduce the source of air pollution.'}
+        ]},
+      news:{journalist:'A community news bulletin shares practical cleaner-air recommendations.',engineer:'Cleaner transport and energy upgrades appear in the industrial corridor.'}
+    },
+    storm:{name:'Prepare for the Storm',zone:'03 / RESIDENTIAL',emoji:'🌧️',color:'#ff8f9f',intro:'Heavy rain is forecast in our fictional city. Drains are blocked and some homes are vulnerable. Let’s help residents prepare.',clueIntro:'Inspect a blocked drain, rising water marks, and a weak flood barrier.',actionIntro:'Remove three objects blocking neighborhood drainage. This helps, but broader preparedness is needed.',actionVerb:'Clear',actionsName:'drain blockages',metric:'resilience',stepGain:2,
+      clues:[{x:103,y:346,name:'Blocked drain',info:'Trash-filled drains can worsen local surface flooding during heavy rainfall.'},{x:399,y:370,name:'High-water mark',info:'Past flood levels help planners identify areas that may be vulnerable.'},{x:218,y:365,name:'Weak flood protection',info:'Infrastructure and land-use planning influence exposure to flood damage.'}],
+      actions:[{x:104,y:385,name:'Drain A'},{x:400,y:385,name:'Drain B'},{x:219,y:384,name:'Drain C'}],
+      decisions:{
+        journalist:[
+          {title:'Issue a verified preparedness bulletin',sub:'Share reliable alerts, safe routes, and emergency contacts.',cost:17,resilience:24,awareness:24,trust:21,recovery:24,feedback:'Timely, reliable warnings help people prepare, but physical flood protection is also important.'},
+          {title:'Hold a neighborhood readiness workshop',sub:'Help neighbors make emergency plans and supply kits.',cost:11,resilience:15,awareness:16,trust:11,recovery:16,feedback:'Community preparation increases resilience; long-term drainage planning remains necessary.'},
+          {title:'Share a dramatic but unsupported storm prediction',sub:'Post a frightening forecast without checking evidence.',cost:2,resilience:0,awareness:10,trust:-22,recovery:5,feedback:'Unverified disaster warnings can confuse residents. Share official forecasts and practical advice.'}
+        ],
+        engineer:[
+          {title:'Improve drainage and add rain gardens',sub:'Upgrade drains and create places for rainfall to soak in.',cost:33,resilience:31,water:8,trust:16,recovery:26,feedback:'Drainage upgrades and nature-based solutions can reduce some flood risks, though extreme events still need preparation.'},
+          {title:'Install temporary flood barriers',sub:'Protect a vulnerable street while planning longer-term work.',cost:19,resilience:18,trust:10,recovery:18,feedback:'Temporary barriers may help during a storm but cannot replace resilient infrastructure.'},
+          {title:'Build a decorative sign about storms',sub:'Improve the street appearance without changing protection.',cost:6,resilience:2,awareness:4,recovery:8,feedback:'A sign alone does not protect neighborhoods. Preparedness requires reliable information and practical measures.'}
+        ]},
+      news:{journalist:'Residents receive a checked flood-preparedness guide and organize support.',engineer:'Drainage and flood-resilient landscaping upgrades protect vulnerable streets.'}
+    }
+  };
+
+  // Seven genuinely playable characters grouped by their level of influence.
+  const playableRoles={
+    student:{name:'Student',emoji:'🎒',level:'easy',description:'Learn and help through small everyday actions.',color:'#8cbad9',hair:'#564354'},
+    volunteer:{name:'Community Volunteer',emoji:'🌱',level:'easy',description:'Organize neighborhood cleanups and local teams.',color:'#8bd6ac',hair:'#684847'},
+    journalist:{name:'Journalist',emoji:'📷',level:'medium',description:'Verify facts and publish community news.',color:'#86c8aa',hair:'#64464b'},
+    marketing:{name:'Marketing Specialist',emoji:'📣',level:'medium',description:'Design awareness campaigns that move people to act.',color:'#e5a9bb',hair:'#61405f'},
+    engineer:{name:'Engineer',emoji:'👷',level:'medium',description:'Build and improve city environmental systems.',color:'#e6b66f',hair:'#765449'},
+    doctor:{name:'Doctor',emoji:'🩺',level:'medium',description:'Protect residents from environmental health risks.',color:'#e3e9ee',hair:'#50485a'},
+    policymaker:{name:'Policymaker / Mayor',emoji:'🏛️',level:'hardcore',description:'Negotiate agreements, pass rules and allocate city funding.',color:'#a9acd9',hair:'#423c58'}
+  };
+  const allowedByLevel={easy:['student','volunteer'],medium:['journalist','marketing','engineer','doctor'],hardcore:['policymaker']};
+  const levelNames={easy:'Everyday Heroes',medium:'Community Professionals',hardcore:'City Leaders'};
+  function decision(title,sub,cost,field,impact,awareness,trust,recovery,feedback){
+    return {title,sub,cost,[field]:impact,awareness,trust,recovery,feedback};
+  }
+  // Distinct decision sets for every profession in each environmental mission.
+  Object.assign(zones.river.decisions,{
+    student:[
+      decision('Organize a class river cleanup','Bring students and teachers together to collect waste.',9,'water',10,16,10,16,'A student-led cleanup improves the riverbank and gets neighbors involved, but wastewater contamination remains.'),
+      decision('Start a reusable bottle challenge','Encourage classmates to reduce single-use plastics.',5,'water',5,12,7,11,'Reducing single-use plastics can help prevent litter over time, but does not treat polluted drainage.'),
+      decision('Post photos without reporting the source','Share pictures but do not investigate the pollution.',1,'water',1,5,-4,4,'Pictures attract attention, but working with the community and verified information would have a stronger effect.')
+    ],
+    volunteer:[
+      decision('Coordinate a neighborhood litter collection','Recruit residents and safely separate collected waste.',12,'water',14,18,14,19,'Community volunteers remove local litter and help neighbors take responsibility for the riverbank.'),
+      decision('Set up clearly marked recycling bins','Help residents dispose of waste responsibly.',8,'water',8,10,8,13,'Waste separation helps reduce litter, but additional investment is needed to address contaminated runoff.'),
+      decision('Clean only the park entrance','Leave the polluted riverbank unchanged.',3,'water',2,3,0,5,'Making the entrance tidy is a start, but the river still needs attention.')
+    ],
+    marketing:[
+      decision('Launch a fact-checked Save Our River campaign','Design posters and community messages with verified sources.',20,'water',13,27,17,22,'Responsible communication brings residents and organizations together around verified river-restoration goals.'),
+      decision('Create a reusable packaging campaign','Partner with local shops to prevent litter.',12,'water',8,20,9,16,'The campaign can lower future packaging waste, though other pollution sources remain.'),
+      decision('Use a shocking claim without evidence','Boost impressions with misleading environmental claims.',2,'water',1,15,-22,5,'Misleading campaigns can damage trust even when they receive attention.')
+    ],
+    doctor:[
+      decision('Launch a safe-water health advisory','Coordinate water-safety guidance and support vulnerable residents.',22,'water',12,18,19,21,'Health guidance helps residents reduce exposure while responsible agencies work on the water contamination.'),
+      decision('Organize a community hygiene clinic','Educate residents about safe water handling and basic hygiene.',13,'water',8,13,11,15,'Public health education helps protect people, although it does not remove river pollutants.'),
+      decision('Treat symptoms without reporting contamination','Provide short-term support only.',6,'water',2,4,0,8,'Short-term treatment is valuable, but addressing the environmental hazard is also necessary.')
+    ],
+    policymaker:[
+      decision('Sign a wastewater compliance agreement','Fund treatment upgrades and require transparent pollution inspections.',36,'water',34,13,18,28,'A funded compliance agreement can address contamination sources, provided it is properly enforced.'),
+      decision('Approve a temporary river cleanup contract','Fund waste removal while planning stronger regulations.',15,'water',17,9,9,19,'A short contract improves visible waste, though wastewater pollution still needs a lasting solution.'),
+      decision('Announce a river beautification policy only','Spend on appearance without addressing pollution.',5,'water',3,8,-3,7,'A cosmetic policy offers limited environmental improvement and may weaken public confidence.')
+    ]
+  });
+  Object.assign(zones.air.decisions,{
+    student:[
+      decision('Start a walk-or-bike-to-school initiative','Encourage safer low-emission trips in the student community.',10,'air',12,17,10,16,'Active transport campaigns can reduce some vehicle trips when practical alternatives are available.'),
+      decision('Run a classroom switch-off challenge','Reduce wasted lighting and electricity.',6,'air',7,12,8,12,'Saving energy is useful, but industrial emissions will also require larger changes.'),
+      decision('Ignore the emission measurements','Leave the monitor results unused.',1,'air',1,0,-3,3,'Without sharing accurate information or acting, the community misses an opportunity to improve.')
+    ],
+    volunteer:[
+      decision('Create a neighborhood clean-air coalition','Invite residents to support safer travel and cleaner practices.',13,'air',15,20,14,19,'Coordinated community action can support cleaner transit and sustained local improvements.'),
+      decision('Organize a community cycle day','Show alternatives to short car trips.',8,'air',10,14,8,13,'One community event can inspire different travel choices, although system changes take time.'),
+      decision('Plant decorative flowers beside heavy traffic','Beautify sidewalks without addressing emissions.',4,'air',2,5,2,6,'Flowers brighten a street but do not substantially reduce exhaust from busy roads.')
+    ],
+    marketing:[
+      decision('Launch a verified clean-transport campaign','Partner with businesses and transit providers to encourage alternatives.',22,'air',20,27,17,23,'Evidence-based messaging can increase sustainable travel choices and motivate institutional support.'),
+      decision('Run an energy-saving social campaign','Promote efficiency tips based on accurate information.',13,'air',11,20,9,16,'Awareness can reduce some wasted energy, while industrial upgrades require additional action.'),
+      decision('Exaggerate air-quality readings in advertisements','Grab attention using unreliable pollution claims.',2,'air',2,13,-22,5,'Inflated figures can damage public trust and weaken future clean-air campaigns.')
+    ],
+    doctor:[
+      decision('Create a community air-health protection plan','Offer evidence-based guidance for vulnerable residents.',23,'air',16,17,19,22,'Health protection reduces exposure risk and can support informed calls for cleaner air policies.'),
+      decision('Establish a clean-air clinic advisory','Share air-quality information and practical exposure-reduction advice.',13,'air',10,12,13,16,'Better advice helps protect people, but reducing emissions at their source remains essential.'),
+      decision('Hand out masks without addressing pollution','Provide limited personal protection only.',8,'air',4,4,2,9,'Personal protection may help some situations but cannot substitute for cleaner air.')
+    ],
+    policymaker:[
+      decision('Approve an emissions-reduction ordinance','Set enforceable factory standards and support efficiency investment.',35,'air',34,14,20,29,'Clear standards with enforcement and investment can reduce pollution and greenhouse gas emissions.'),
+      decision('Negotiate a low-emission transport contract','Fund cleaner buses and safer public transport.',18,'air',19,11,12,21,'A transit contract can improve air quality while expanding affordable travel options.'),
+      decision('Approve a factory wall-painting campaign','Improve appearances without emissions rules.',5,'air',2,4,-4,7,'A cosmetic project does little to change pollution sources.')
+    ]
+  });
+  Object.assign(zones.storm.decisions,{
+    student:[
+      decision('Create a school storm-safety buddy system','Help classmates prepare kits and understand official warnings.',10,'resilience',17,19,12,18,'Students can help families prepare and share reliable safety information.'),
+      decision('Make emergency supply checklists','Help neighbors remember water, contacts, and safe routes.',6,'resilience',10,13,8,13,'Practical checklists support preparedness, although they do not change flood-prone infrastructure.'),
+      decision('Share a rumor about storm timing','Forward an unverified storm claim.',1,'resilience',1,5,-13,4,'Unverified warnings can confuse people during emergencies.')
+    ],
+    volunteer:[
+      decision('Organize a community emergency team','Coordinate verified warnings, supplies and safe support locations.',14,'resilience',22,18,15,22,'Prepared community teams can support vulnerable residents and safer emergency responses.'),
+      decision('Prepare supply bags for neighbors','Assemble basics for residents who may need help.',8,'resilience',14,10,8,15,'Emergency supplies can reduce immediate hardship, though longer-term flood-risk planning is also needed.'),
+      decision('Decorate evacuation signs only','Improve visuals without checking safe routes.',3,'resilience',3,4,0,6,'Pretty signs are not enough without accurate routes and community planning.')
+    ],
+    marketing:[
+      decision('Run an official-source storm readiness campaign','Distribute checked warnings and emergency preparation tips.',19,'resilience',24,26,18,23,'Clear, accessible preparedness messages can help more households take action before heavy rain.'),
+      decision('Produce illustrated emergency checklists','Use friendly materials to improve household readiness.',11,'resilience',15,18,10,17,'Visual checklists help people prepare but cannot eliminate physical flood risks.'),
+      decision('Publish a dramatic unconfirmed countdown','Create a sensational viral story.',2,'resilience',1,14,-21,5,'Dramatic but false warnings may create confusion and reduce trust.')
+    ],
+    doctor:[
+      decision('Coordinate flood-related public-health response','Prepare safe shelter guidance, hygiene support and vulnerable resident outreach.',23,'resilience',27,17,19,23,'Coordinated public health preparation helps protect people during and after flood emergencies.'),
+      decision('Prepare heat and flood emergency medical kits','Stock basic resources and create triage guidance.',13,'resilience',16,10,11,16,'Emergency supplies help with immediate needs but drainage and structural exposure still matter.'),
+      decision('Wait until after flooding to communicate','Delay reliable advice until people are already affected.',3,'resilience',2,2,-9,6,'Late advice misses a chance to help the community prepare before the storm.')
+    ],
+    policymaker:[
+      decision('Approve a flood-resilience infrastructure budget','Fund drainage, rain gardens and maintenance contracts.',33,'resilience',34,13,18,29,'A funded, maintained adaptation project can reduce some risks from extreme rainfall.'),
+      decision('Sign a neighborhood early-warning agreement','Coordinate alerts, shelters and community responders.',16,'resilience',21,14,14,21,'Clear agreements improve preparedness and cooperation, although flooding remains possible.'),
+      decision('Fund a decorative flood-awareness statue','Improve appearance without improving safety.',5,'resilience',2,3,-4,7,'Decorative gestures do little to protect people without practical preparation.')
+    ]
+  });
+  Object.assign(zones.river.news,{
+    student:'Students organize a riverside cleanup and invite families to join.',volunteer:'Community volunteers coordinate a riverbank cleanup and recycling points.',marketing:'A fact-checked Save Our River campaign encourages community action.',doctor:'The health team publishes a safe-water advisory for at-risk neighbors.',policymaker:'The mayor signs a water-protection agreement and reviews treatment funding.'
+  });
+  Object.assign(zones.air.news,{
+    student:'Students share clean-commute and energy-saving challenges.',volunteer:'Volunteers organize a neighborhood clean-air action group.',marketing:'A creative, evidence-based cleaner-air campaign reaches local families.',doctor:'A community health bulletin explains air exposure risks and practical protections.',policymaker:'City leaders approve cleaner-industry and transportation measures.'
+  });
+  Object.assign(zones.storm.news,{
+    student:'Students prepare safety checklists and help neighbors find reliable alerts.',volunteer:'Community volunteers organize supplies and a flood-preparedness network.',marketing:'A verified storm preparedness campaign reaches households across the city.',doctor:'Medical volunteers coordinate support for vulnerable residents ahead of heavy rain.',policymaker:'City leaders fund flood infrastructure and coordinate preparedness agreements.'
+  });
+
+  const state={screen:'intro',role:'student',difficulty:'easy',active:null,player:{x:445,y:319},health:80,energy:70,air:30,water:25,recovery:10,resilience:20,awareness:10,trust:50,funds:75,progress:{},echo:'Welcome to 2050! The little lights are asking for help.',time:0,hazardClock:0,walkClock:0,clickTarget:null,modal:true,newsHeadline:'A quiet city awaits its helpers',newsBody:'Fictional neighbors are waiting for you to take the first step.'};
+  let lastFrame=performance.now(),toastTimer=null;
+  const stages=['river','air','storm'];
+  const countDone=()=>stages.filter(k=>state.progress[k]?.complete).length;
+  const done=k=>Boolean(state.progress[k]?.complete);
+  const activeProgress=()=>state.active?state.progress[state.active]:null;
+  const stageLabel=k=>({beacon:'Find the light',clues:'Investigate 3 clues',action:'Finish 3 action items',decision:'Choose a solution',complete:'Mission completed'}[k]||'');
+  function setModal(html){state.modal=true;document.body.classList.toggle('role-select-active',state.screen==='select');overlay.innerHTML=html;overlay.classList.remove('hidden');keys.clear();touchKeys.clear();state.clickTarget=null;}
+  function hideModal(){state.modal=false;document.body.classList.remove('role-select-active');overlay.classList.add('hidden');overlay.innerHTML='';keys.clear();touchKeys.clear();}
+  function showToast(text){const el=$('toast');el.textContent=text;el.classList.remove('hidden');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.add('hidden'),2900);}
+  function setEcho(text){state.echo=text;updateHUD();}
+  function updateHUD(){
+    ['health','energy','air','water','recovery'].forEach(k=>{$(k+'Text').textContent=Math.round(state[k])+'%';$(k+'Bar').style.width=clamp(state[k])+'%';});
+    $('awarenessText').textContent=Math.round(state.awareness)+'%';$('trustText').textContent=Math.round(state.trust)+'%';$('fundsText').textContent=Math.round(state.funds)+' credits';$('resilienceText').textContent=Math.round(state.resilience)+'%';
+    $('roleAvatar').textContent=state.screen==='intro'?'?':playableRoles[state.role].emoji;
+    $('roleDetail').textContent=state.screen==='intro'?'Choose a profession':state.difficulty[0].toUpperCase()+state.difficulty.slice(1)+' mode';
+    $('roleName').textContent=state.screen==='intro'?'Awaiting player':playableRoles[state.role].name;
+    $('weatherLabel').textContent=countDone()===3?'A greener city · all three areas improving':countDone()?'Restoration in progress · '+countDone()+'/3 districts':'Dark skies · climate-damaged neighborhoods';
+    $('miniPlayer').style.left=state.player.x/W*100+'%';$('miniPlayer').style.top=state.player.y/H*100+'%';
+    const k=state.active||stages.find(x=>!done(x))||'river';const z=zones[k],p=state.progress[k];
+    $('missionEmoji').textContent=z.emoji;$('missionZone').textContent=z.zone;$('missionTitle').textContent=z.name;
+    $('missionDescription').textContent=state.active?z.intro:countDone()===3?'All three missions completed. The community has a stronger foundation for the future.':'Follow the glowing '+(k==='river'?'blue':k==='air'?'yellow':'red')+' light, or explore any zone to help the city.';
+    $('missionStatus').textContent=state.active?'● '+(p.phase==='complete'?'COMPLETE':'IN PROGRESS'):'✦ '+countDone()+'/3 DONE';
+    $('taskList').innerHTML=[['Find glowing mission light',p.phase!=='beacon'],['Investigate 3 clues',p.clues.every(Boolean)],['Complete 3 practical actions',p.actions.every(Boolean)],['Make a professional decision',p.complete]].map(([label,success],i)=>`<div class="task-item ${success?'complete':''}"><span class="check">${success?'✓':i+1}</span><span>${label}${i===1&&!success?` (${p.clues.filter(Boolean).length}/3)`:''}${i===2&&!success?` (${p.actions.filter(Boolean).length}/3)`:''}</span></div>`).join('');
+    $('echoText').textContent=state.echo;
+    $('missionHint').textContent=state.active?(p.phase==='clues'?`✧ Investigate clues ${p.clues.filter(Boolean).length}/3`:p.phase==='action'?`✿ ${z.actionVerb} ${p.actions.filter(Boolean).length}/3`:p.phase==='decision'?'✦ Choose a solution':`✿ ${z.name} complete`):countDone()===3?'✿ The city is growing again!':'✦ Follow a light to begin a mission';
+    $('newsHeadline').textContent=state.newsHeadline;$('newsBody').textContent=state.newsBody;
+    const near=getNearby();$('nearPrompt').classList.toggle('hidden',!near);if(near)$('nearPrompt').innerHTML=`Press <kbd>E</kbd> · ${near.label}`;
+    document.querySelectorAll('.mini-pin').forEach(el=>{el.classList.remove('complete')});
+    if(done('river'))document.querySelector('.mini-pin.mini-blue')?.classList.add('complete');
+    if(done('air'))document.querySelector('.mini-pin.mini-orange')?.classList.add('complete');
+    if(done('storm'))document.querySelector('.mini-pin.mini-red')?.classList.add('complete');
+  }
+  function resetState(){
+    const progress={};stages.forEach(k=>progress[k]={phase:'beacon',clues:[false,false,false],actions:[false,false,false],decision:null,complete:false});
+    Object.assign(state,{screen:'intro',role:'student',difficulty:'easy',active:null,player:{x:445,y:319},health:80,energy:70,air:30,water:25,recovery:10,resilience:20,awareness:10,trust:50,funds:75,progress,echo:'Welcome to 2050! Follow the little lights and help the city.',time:0,hazardClock:0,walkClock:0,clickTarget:null,newsHeadline:'A quiet city awaits its helpers',newsBody:'Fictional neighbors are waiting for you to take the first step.'});
+    showIntro();updateHUD();
+  }
+  function showIntro(){
+    state.screen='intro';setModal(`<div class="modal"><div class="seed">🌱 ✧</div><div class="chapter">AN AI + CLIMATE GAME CONCEPT</div><h2>RE:<em>GREEN</em> 2050</h2><p class="subtitle"><b>A World Worth Saving · A Damaged Future. A Second Chance.</b></p><p>Welcome to 2050. Pollution, heavy rain, and energy problems have left this fictional city in the dark. But tiny lights still glow in its streets. Explore, help your neighbors, and bring color back—one thoughtful choice at a time.</p><div class="pill-row"><span class="mini-pill">☾ COZY DARK CITY</span><span class="mini-pill">♡ HEALTH & ENERGY</span><span class="mini-pill">✿ 3 PLAYABLE MISSIONS</span></div><div class="button-row"><button id="startBtn" class="primary-btn">LET'S SAVE OUR CITY ✨</button><button id="introHelpBtn" class="secondary-btn">HOW TO PLAY</button></div><p class="micro-note">Hackathon competition demo. ECHO uses prepared educational dialogue, not live generative AI.</p></div>`);
+    $('startBtn').onclick=showRoleSelect;$('introHelpBtn').onclick=showHelp;
+  }
+  function showRoleSelect(){
+    state.screen='select';
+    const roles=allowedByLevel[state.difficulty];
+    const cards=roles.map(key=>{const r=playableRoles[key];return `<button class="role-option ${state.role===key?'active':''}" data-role="${key}" aria-pressed="${state.role===key}"><span class="emoji">${r.emoji}</span><strong>${r.name}</strong><small>${r.description}</small></button>`}).join('');
+    setModal(`<div class="modal role-select-modal"><div class="chapter">01 · EVERY HELPER MATTERS</div><h2>Choose your <em>little hero!</em></h2><p>Start by selecting your level of influence. Then choose a character. Every hero has their own solutions in all three missions.</p><div class="chapter">CHOOSE YOUR LEVEL</div><div class="difficulty role-levels">${['easy','medium','hardcore'].map(d=>`<button data-difficulty="${d}" class="${state.difficulty===d?'active':''}">${d==='easy'?'🎒 Easy · Students':d==='medium'?'💼 Medium · Professionals':'🏛️ Hardcore · Leaders'}</button>`).join('')}</div><div class="chapter" style="margin:13px 0 8px">${levelNames[state.difficulty].toUpperCase()} · CHOOSE YOUR ROLE</div><div class="role-choices expanded-roles">${cards}</div><p class="micro-note">${state.difficulty==='easy'?'Students and volunteers use community action with more resources and guidance.':state.difficulty==='medium'?'Journalism, marketing, engineering and medicine have different professional tools.':'The Mayor can approve policies and contracts but faces tighter budgets and risks.'}</p><div class="button-row"><button id="backBtn" class="secondary-btn">← BACK</button><button id="playBtn" class="primary-btn">ENTER THE CITY →</button></div><p class="micro-note">7 playable roles · 3 difficulty tiers · 3 profession-specific mission decisions per district.</p></div>`);
+    overlay.querySelectorAll('[data-role]').forEach(b=>b.onclick=()=>{state.role=b.dataset.role;showRoleSelect()});
+    overlay.querySelectorAll('[data-difficulty]').forEach(b=>b.onclick=()=>{state.difficulty=b.dataset.difficulty;state.role=allowedByLevel[state.difficulty][0];showRoleSelect()});
+    $('backBtn').onclick=showIntro;$('playBtn').onclick=startGame;
+  }
+  function startGame(){state.screen='game';state.player={x:445,y:319};const cfg={easy:[100,95,100],medium:[80,70,75],hardcore:[65,55,48]};[state.health,state.energy,state.funds]=cfg[state.difficulty];state.echo='Hi, I’m ECHO! 💚 Blue is for water, yellow for air, red for storms. Green is our safe garden. Walk to any glowing light and press E!';hideModal();updateHUD();}
+  function showHelp(){const prior=state.screen;setModal(`<div class="modal small-modal"><div class="seed">✨</div><div class="chapter">HOW TO PLAY</div><h2>Follow the <em>little lights.</em></h2><ul><li><b>WASD / arrow keys:</b> move your character. On phones use the arrows or tap the map.</li><li><b>E / INTERACT:</b> examine glowing markers, clues, and action objects.</li><li><b>Blue / yellow / red:</b> river pollution, industrial air, and flooding. All 3 are playable.</li><li><b>Green garden:</b> rest and recover health and energy.</li><li>For each mission, inspect 3 clues, complete 3 practical actions, and make 1 career-based decision.</li><li>Watch the city become brighter as each environmental area improves.</li></ul><p>ECHO's messages are prewritten; a secure connection to an actual AI model is future work. Scores are fictional game indicators.</p><div class="button-row"><button id="helpClose" class="primary-btn">I'M READY 🌿</button></div></div>`);$('helpClose').onclick=()=>prior==='game'?hideModal():prior==='select'?showRoleSelect():showIntro();}
+  function getNearby(){
+    if(state.screen!=='game'||state.modal)return null;
+    const pool=[];
+    if(state.active){const k=state.active,p=state.progress[k],z=zones[k];
+      if(p.phase==='clues')z.clues.forEach((c,i)=>{if(!p.clues[i]&&dist(state.player,c)<51)pool.push({kind:'clue',index:i,label:'Inspect '+c.name,at:c,score:dist(state.player,c)-12})});
+      if(p.phase==='action')z.actions.forEach((c,i)=>{if(!p.actions[i]&&dist(state.player,c)<52)pool.push({kind:'action',index:i,label:z.actionVerb+' '+c.name,at:c,score:dist(state.player,c)-12})});
+    }
+    beacons.forEach(b=>{const d=dist(state.player,b);if(d<54)pool.push({kind:'beacon',type:b.type,label:b.type==='garden'?'Rest in the safe garden':done(b.type)?'Review restored '+zones[b.type].name:b.type==='river'?'Blue · Save the River':b.type==='air'?'Yellow · Clear the Air':'Red · Prepare for the Storm',at:b,score:d})});
+    pool.sort((a,b)=>a.score-b.score);return pool[0]||null;
+  }
+  function interact(){
+    if(state.modal)return;const o=getNearby();if(!o){showToast('Walk closer to a glowing object to interact. ✦');return;}
+    if(o.kind==='beacon'){
+      if(o.type==='garden'){const gain=state.difficulty==='hardcore'?20:32;state.energy=clamp(state.energy+gain);state.health=clamp(state.health+15);setEcho('Our tiny community garden is a safe rest stop. Taking care of yourself helps you keep helping others. 🌱');showToast('Rested safely · health +15 · energy +'+gain);updateHUD();return;}
+      if(done(o.type)){state.active=null;showToast('This district is recovering! Choose another glowing light.');setEcho(zones[o.type].name+' is already improving. Explore another area to help more residents.');updateHUD();return;}
+      if(state.active&&state.active!==o.type){showToast('Finish your current mission before starting another!');return;}
+      const k=o.type;state.active=k;const p=state.progress[k],z=zones[k];if(p.phase==='beacon'){p.phase='clues';setEcho(z.intro+' '+z.clueIntro);showToast('✦ MISSION STARTED · '+z.name);}else if(p.phase==='decision')showDecision();else showToast(stageLabel(p.phase));updateHUD();return;
+    }
+    const k=state.active,p=state.progress[k],z=zones[k];
+    if(o.kind==='clue'){p.clues[o.index]=true;state.energy=clamp(state.energy-1);setEcho('✦ '+z.clues[o.index].name+': '+z.clues[o.index].info);if(p.clues.every(Boolean)){p.phase='action';showToast('All clues discovered! Time to take action.');setEcho(z.actionIntro)}updateHUD();return;}
+    if(o.kind==='action'){p.actions[o.index]=true;state.energy=clamp(state.energy-4);state[z.metric]=clamp(state[z.metric]+z.stepGain);const count=p.actions.filter(Boolean).length;setEcho(`Great! ${z.actionVerb} completed (${count}/3). Small actions help, but lasting results also require larger solutions.`);if(p.actions.every(Boolean)){p.phase='decision';setEcho('You took action! Now choose a longer-term solution through your profession.');showDecision()}updateHUD();return;}
+  }
+  function showDecision(){const k=state.active,z=zones[k],p=state.progress[k],role=playableRoles[state.role].name;
+    const list=z.decisions[state.role];setModal(`<div class="modal"><div class="seed">${z.emoji}</div><div class="chapter">${z.zone} · YOUR BIG DECISION</div><h2>What should we <em>do next?</em></h2><p><b>ECHO:</b> Your investigation and action helped! Now, as a ${role}, choose a response with longer-term consequences. You have <b>${Math.round(state.funds)} city resource credits.</b></p><div class="choice-list">${list.map((m,i)=>`<button class="choice-btn" data-choice="${i}" ${m.cost>state.funds?'disabled':''}><strong>${i+1}. ${m.title} <span class="credit">${m.cost} credits</span></strong><span>${m.sub}</span>${m.cost>state.funds?'<small>Not enough resources — choose another solution</small>':''}</button>`).join('')}</div><p class="micro-note">These are simplified educational game effects, not scientific predictions. Stronger choices may cost more resources.</p></div>`);
+    overlay.querySelectorAll('[data-choice]').forEach(b=>b.onclick=()=>finishMission(k,Number(b.dataset.choice)));
+  }
+  function finishMission(k,index){const z=zones[k],p=state.progress[k],out=z.decisions[state.role][index];if(out.cost>state.funds)return;
+    p.phase='complete';p.decision=index;p.complete=true;state.funds=clamp(state.funds-out.cost,0,100);state.recovery=clamp(state.recovery+(out.recovery||0));
+    for(const field of ['water','air','resilience','health','awareness','trust'])state[field]=clamp(state[field]+(out[field]||0));
+    state.newsHeadline=z.name+' — neighborhood update';state.newsBody=z.news[state.role];state.echo=countDone()===3?'You helped all three districts! The city is healthier, but sustainable progress takes continued effort. Thank you, little hero! 🌱':'We made a difference in '+z.name+'! This is a beginning, not an instant solution. Keep following the other little lights. 💚';
+    showResult(k);updateHUD();
+  }
+  function showResult(k){const z=zones[k],p=state.progress[k],out=z.decisions[state.role][p.decision],all=countDone()===3;
+    setModal(`<div class="modal"><div class="seed">${all?'🌍 🌸':'✿ ✨'}</div><div class="chapter">${z.zone} · MISSION COMPLETE</div><h2>${all?'Our little city is':'The city is'} <em>${all?'hopeful again!':'growing again!'}</em></h2><p>${all?'You completed all three neighborhood missions! The city has a stronger foundation for its future.':'Your investigation, practical action, and career-specific decision improved one part of the neighborhood.'}</p><div class="result-grid"><div class="result-box"><b>+${out.recovery}</b><small>CITY RECOVERY</small></div><div class="result-box"><b>${(out[z.metric]||0)+6>0?'+':''}${(out[z.metric]||0)+6}</b><small>${z.metric.toUpperCase()}</small></div><div class="result-box"><b>${out.trust>=0?'+':''}${out.trust||0}</b><small>TRUST</small></div></div><div class="explain"><b>💬 ECHO:</b> ${out.feedback}</div><p class="micro-note">City recovery is gradual. Cleaner neighborhoods, sustainable systems, and community action take time.</p><div class="button-row"><button class="primary-btn" id="viewWorld">${all?'EXPLORE OUR BRIGHTER CITY 🌿':'SEE THE CHANGES ✨'}</button><button class="secondary-btn" id="replayBtn">RESTART ALL MISSIONS</button></div></div>`);
+    $('viewWorld').onclick=()=>{state.active=null;hideModal();showToast(all?'🌿 All three areas are on a healthier path!':'✿ Mission complete! Find another glowing signal.');updateHUD()};$('replayBtn').onclick=resetState;
+  }
+  function movePlayer(dx,dy,dt){if(!dx&&!dy)return;const length=Math.hypot(dx,dy);dx/=length;dy/=length;
+    const speed=state.energy<=1?95:state.difficulty==='easy'?174:state.difficulty==='hardcore'?145:159;
+    const old={...state.player},next={x:clamp(old.x+dx*speed*dt,29,931),y:clamp(old.y+dy*speed*dt,253,394)};
+    const obstacles=[{x:205,y:276,w:143,h:55},{x:608,y:276,w:66,h:54}];
+    const blocked=(x,y)=>obstacles.some(o=>x>o.x-12&&x<o.x+o.w+12&&y>o.y-11&&y<o.y+o.h+11);
+    if(!blocked(next.x,old.y))state.player.x=next.x;if(!blocked(state.player.x,next.y))state.player.y=next.y;
+    state.walkClock+=dt;if(state.walkClock>2){state.walkClock=0;state.energy=clamp(state.energy-(state.difficulty==='hardcore'?.8:.48));updateHUD();}
+  }
+  function update(dt){state.time+=dt;if(state.screen!=='game'||state.modal)return;
+    let dx=0,dy=0;if(keys.has('ArrowLeft')||keys.has('a')||touchKeys.has('left'))dx--;if(keys.has('ArrowRight')||keys.has('d')||touchKeys.has('right'))dx++;
+    if(keys.has('ArrowUp')||keys.has('w')||touchKeys.has('up'))dy--;if(keys.has('ArrowDown')||keys.has('s')||touchKeys.has('down'))dy++;
+    if(!dx&&!dy&&state.clickTarget){const d=dist(state.player,state.clickTarget);if(d<8)state.clickTarget=null;else{dx=(state.clickTarget.x-state.player.x)/d;dy=(state.clickTarget.y-state.player.y)/d}}else if(dx||dy)state.clickTarget=null;
+    if(dx||dy)movePlayer(dx,dy,dt);
+    const dirtyAir=state.player.x>752&&state.player.y<320&&!done('air');
+    const floodRisk=state.player.x<188&&state.player.y>348&&!done('storm');
+    if(dirtyAir||floodRisk){state.hazardClock+=dt;if(state.hazardClock>5){state.hazardClock=0;state.health=clamp(state.health-({easy:2,medium:4,hardcore:6}[state.difficulty]));setEcho(dirtyAir?'This air may be unhealthy. Limit time near smoky areas and work on pollution sources.':'Floodwater can be hazardous. Move to a safer area and prepare the neighborhood.');if(state.health<=0){state.health=55;state.energy=45;state.player={x:445,y:319};showToast('You are safe! ECHO returned you to the garden checkpoint.')}}}else state.hazardClock=0;
+    $('miniPlayer').style.left=state.player.x/W*100+'%';$('miniPlayer').style.top=state.player.y/H*100+'%';const near=getNearby();$('nearPrompt').classList.toggle('hidden',!near);if(near)$('nearPrompt').innerHTML=`Press <kbd>E</kbd> · ${near.label}`;
+  }
+  // ----- Canvas artwork (all original, generated with procedural shapes) -----
+  function rect(x,y,w,h,c,r=0){ctx.fillStyle=c;if(r){ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fill()}else ctx.fillRect(x,y,w,h)}
+  function circle(x,y,r,c){ctx.fillStyle=c;ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fill()}
+  function line(x1,y1,x2,y2,c,width=1){ctx.strokeStyle=c;ctx.lineWidth=width;ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke()}
+  function poly(points,c){ctx.fillStyle=c;ctx.beginPath();ctx.moveTo(points[0][0],points[0][1]);points.slice(1).forEach(([x,y])=>ctx.lineTo(x,y));ctx.closePath();ctx.fill()}
+  function label(s,x,y,size=12,c='#f2f8fa',align='center'){ctx.textAlign=align;ctx.textBaseline='middle';ctx.fillStyle=c;ctx.font=`900 ${size}px Nunito,sans-serif`;ctx.fillText(s,x,y)}
+  function glow(x,y,r,c){const g=ctx.createRadialGradient(x,y,1,x,y,r);g.addColorStop(0,c);g.addColorStop(.3,c.replace(/,\s*[\d.]+\)$/,', 0.22)'));g.addColorStop(1,'#00000000');ctx.fillStyle=g;ctx.fillRect(x-r,y-r,2*r,2*r)}
+  function drawBuilding(x,y,w,h,i,recovered){
+    const shades=recovered?['#5b7a78','#71858a','#718f86','#536d79']:['#293b4c','#354050','#46505a','#34445a'];
+    const base=shades[i%shades.length];
+    rect(x+6,y+8,w,h,'#0b1b2c99',3);rect(x,y,w,h,base,3);
+    rect(x-4,y,w+8,9,recovered?'#95a2a2':'#4b5864',2);rect(x+5,y+13,w-10,4,'#253f4c');
+    for(let r=0;r<3;r++)for(let col=0;col<Math.max(2,Math.floor(w/38));col++){
+      const wx=x+16+col*34,wy=y+28+r*33;if(wx+16>x+w-5||wy+23>y+h)continue;
+      const on=recovered||((r+col+i)%3===0);
+      rect(wx,wy,15,22,on?'#efc48c':'#172c38');rect(wx+6,wy,2,22,'#455e64');rect(wx,wy+10,15,2,'#455e64');
+      if(!on&&(i+r+col)%4===0){line(wx,wy+3,wx+12,wy+20,'#71838a',1);line(wx+14,wy+4,wx+4,wy+12,'#71838a',1)}
+    }
+    if(!recovered){line(x+15,y+h-14,x+32,y+h-29,'#8e8882',2);line(x+32,y+h-29,x+24,y+h-40,'#8e8882',1);rect(x+w*.64,y+h-8,20,7,'#344249')}
+    else{rect(x+7,y+h-6,w-14,6,'#577a63');for(let k=0;k<3;k++)circle(x+16+k*16,y+h-6,4,'#76b687')}
+  }
+  function drawSky(t){
+    const recovered=countDone()===3;
+    const g=ctx.createLinearGradient(0,0,0,330);
+    if(recovered){g.addColorStop(0,'#4b8297');g.addColorStop(.6,'#839eaa');g.addColorStop(1,'#d5bd91')}
+    else{g.addColorStop(0,'#0d1a2e');g.addColorStop(.65,'#344055');g.addColorStop(1,'#5a5364')}
+    ctx.fillStyle=g;ctx.fillRect(0,0,W,340);
+    circle(645,55,recovered?35:29,recovered?'#f5d8a3':'#e9b894');glow(645,55,93,recovered?'rgba(249,207,138,0.15)':'rgba(239,164,140,0.08)');
+    if(!recovered)for(let k=0;k<22;k++){const x=(k*191+32)%960,y=(k*37+9)%143;circle(x,y,(k%2)+.55,'#d5d8e688')}
+    for(let i=0;i<25;i++){const x=i*43-5,y=127+(i*13%58),h=90+(i*19%74);rect(x,y,30+i%3*7,h,recovered?'#507582':'#223348');for(let k=0;k<3;k++)rect(x+7+(k%2)*11,y+18+k*31,4,7,recovered?'#edcb98':(i+k)%3===0?'#ac8472':'#2c3e4b')}
+    if(!done('air')){
+      for(const [x,y] of [[815,127],[876,109]]){
+        rect(x,y,17,94,'#293a46');rect(x-5,y-7,27,9,'#5d5c62');
+        for(let j=0;j<9;j++){const yy=y-25-j*17-t*5%39;circle(x+9+Math.sin(j+t)*16,yy,15+j*.8,`rgba(77,83,94,${.12-(j*.008)})`)}
+      }
+      for(let i=0;i<7;i++)circle(90+i*160+Math.sin(t*.14+i)*23,178+(i%2)*22,55,'#68738313');
+    }
+  }
+  function drawStreet(t){
+    const r=countDone()>=2;
+    rect(0,234,W,128,r?'#727d70':'#47515c');rect(0,358,W,67,r?'#9b9781':'#79796f');
+    rect(0,241,W,9,r?'#a0a696':'#69757c');rect(0,357,W,6,r?'#a0a696':'#666f73');
+    for(let x=0;x<960;x+=100)rect(x+26,297,52,3,r?'#e1d3aa':'#aba69a');
+    // stone patterns and cracks
+    for(let i=0;i<30;i++){
+      const x=(((i*137)%973)+973)%973,y=260+(i*37%137);
+      if(i%3===0&&!r){line(x,y,x+12,y-5,'#273542',2);line(x+12,y-5,x+20,y+3,'#273542',2)}
+      else rect(x,y,12,2,r?'#c4b7a0':'#a6a092');
+    }
+    for(let i=0;i<14;i++){const x=(i*83+42)%948;line(x,362,x+8,367,r?'#c8bd98':'#4b5459',2)}
+    // pavement puddles
+    if(!r){for(let i=0;i<7;i++){ctx.save();ctx.scale(1,.5);circle(98+i*143,655+(i%2)*17,17,'#7892a052');ctx.restore();}}
+    // wrecked car
+    rect(223,294,119,29,r?'#5f9ba3':'#665c5b',7);rect(237,280,75,30,r?'#7bc2c7':'#755d5b',8);rect(247,284,22,16,'#193f4e');rect(279,284,22,16,'#1c303e');circle(246,325,12,'#27313b');circle(246,325,6,'#66636b');circle(314,325,12,'#27313b');circle(314,325,6,'#66636b');if(!r){line(247,285,263,301,'#a7a2a2',2);rect(214,323,26,8,'#403b41')}else{rect(219,300,17,7,'#9cead4')}
+    // industrial crate stack
+    for(const [x,y,w,h] of [[613,289,61,28],[619,268,47,21]]){rect(x,y,w,h,r?'#8b9d8e':'#625f5d',3);rect(x+4,y+5,w-8,h-10,r?'#a4baa2':'#7c7370');line(x+5,y+6,x+w-5,y+h-6,'#415363',2)}
+    // curb trash + plants
+    if(r){for(let i=0;i<9;i++){const x=(i*124+44)%939;drawTree(x,350+i%2*16,true,.6)}}
+    else{for(let i=0;i<9;i++){const x=(i*117+35)%950,y=363+i%3*7;rect(x,y,13,6,'#677278');rect(x+13,y-3,9,8,'#374351');}}
+  }
+  function drawRiver(t){
+    const r=done('river');
+    const grad=ctx.createLinearGradient(0,412,0,540);grad.addColorStop(0,r?'#459caa':'#335c6f');grad.addColorStop(1,r?'#3a94b6':'#1a3e54');rect(0,412,W,128,grad);
+    for(let i=0;i<38;i++){const x=(i*137+29)%956,y=428+(i*23%113);const shift=Math.sin(t*1.1+i)*5;line(x+shift,y,x+14+shift,y,r?'#9bd8d5a8':'#9ea1a36a',1.5)}
+    // dirty discharge pipe, then repaired outlet
+    rect(841,381,39,29,r?'#728c85':'#30383c',7);rect(849,388,28,19,r?'#435b61':'#121b27',5);
+    if(!r){poly([[847,405],[876,405],[889,451],[864,445]],'#777b6899');for(let j=0;j<5;j++)circle(863+j*5,435+j%2*4,3,'#978f74')}
+    else{line(869,403,869,432,'#9adbd4',3);circle(871,432,4,'#bbf1e6')}
+    // railing over the embankment
+    line(0,410,W,410,r?'#9cbdb0':'#5d7475',5);
+    for(let x=20;x<958;x+=64){rect(x,397,7,24,r?'#a0baa8':'#667b80');circle(x+3,397,4,r?'#d5d4ad':'#87979c')}
+    if(!r){for(let i=0;i<13;i++){const x=(i*91+25)%949,y=446+(i*31%84);rect(x,y,9+(i%3)*4,6+(i%2)*3,['#79756a','#586873','#6d797f'][i%3],2);if(i%4===0)circle(x+3,y+2,4,'#9f8570')}}
+    else {for(let i=0;i<5;i++){const x=120+i*165,y=450+(i%3)*25;circle(x,y,4,'#d5f4db');line(x,y,x+15,y-3,'#a9e4d0',1.5)}drawDuck(527,479,t)}
+  }
+  function drawDuck(x,y,t){const bob=Math.sin(t*2)*2;circle(x,y+bob,14,'#f8e4b8');circle(x+12,y-10+bob,9,'#fbe5b7');poly([[x+19,y-9+bob],[x+29,y-5+bob],[x+19,y-3+bob]],'#e5a56c');circle(x+15,y-13+bob,1.5,'#1c3945')}
+  function drawTree(x,y,r,scale=1){ctx.save();ctx.translate(x,y);ctx.scale(scale,scale);rect(-4,-26,8,33,r?'#786848':'#51453f');if(r){for(const [dx,dy,ra] of [[-12,-28,13],[10,-33,14],[0,-44,17]])circle(dx,dy,ra,['#6dba83','#8bcc91','#67a876'][Math.abs(dx)%3]);circle(2,-35,4,'#b7dcb2')}else{line(0,-19,-15,-39,'#544441',3);line(-4,-22,10,-49,'#544441',3);line(0,-34,20,-43,'#544441',2)}ctx.restore()}
+  function drawProps(t){
+    const r=countDone()>=2;
+    for(const [x,y] of [[84,365],[470,362],[780,368]]){
+      rect(x-2,y-45,6,49,'#444d51');glow(x,y-46,48,r?'rgba(255,223,155,0.32)':'rgba(251,181,98,0.19)');circle(x+1,y-47,7,r?'#ffe9ab':'#e6b777');rect(x-6,y-53,14,4,'#505c58');
+    }
+    for(const [x,y] of [[66,371],[374,369],[578,370],[921,373]])drawTree(x,y,r,.72);
+    if(r){
+      for(let i=0;i<28;i++){const x=(i*131+14)%950,y=378+(i*17%26);circle(x,y,2.5,['#bcda9c','#f0cbaf','#85c2a0'][i%3]);}
+      rect(13,315,104,7,'#79aa7f',3);rect(899,326,51,6,'#8eba87',3);
+    }else{
+      for(let i=0;i<17;i++){const x=(i*67+27)%949,y=383+(i*13%22);circle(x,y,2.2,'#a4a29b');}
+    }
+    // storm hazard pooling at the western end
+    if(!done('storm')){ctx.save();ctx.scale(1,.42);circle(166,865,45,'#608da36b');ctx.restore()}
+  }
+  function drawClue(c,i,t,k){
+    const p=state.progress[k];if(p.clues[i]||p.phase!=='clues')return;
+    const col=zones[k].color;
+    glow(c.x,c.y-18,43,k==='river'?'rgba(107,212,255,0.4)':k==='air'?'rgba(255,206,116,0.4)':'rgba(255,146,170,0.4)');
+    const y=c.y-19+Math.sin(t*4+i)*3;
+    circle(c.x,y,14,col);circle(c.x,y,10,'#335164');label('?',c.x,y,16,'#ffffff');
+    circle(c.x-17,y+17,2.8,'#ffffff66');circle(c.x+16,y-13,2,'#ffffff88');
+  }
+  function drawAction(a,i,t,k){
+    const p=state.progress[k];if(p.actions[i]||p.phase!=='action')return;
+    const y=a.y+Math.sin(t*4+i)*1.5;
+    glow(a.x,y-8,34,k==='river'?'rgba(116,227,225,0.28)':k==='air'?'rgba(255,195,111,0.24)':'rgba(255,151,162,0.26)');
+    if(k==='river'){
+      ctx.save();ctx.translate(a.x,y);ctx.rotate(-.22+i*.18);rect(-10,-6,22,12,'#b3e2da',3);rect(-7,-10,8,4,'#e4eee7',2);rect(2,-3,6,4,'#5897a1',1);ctx.restore();
+    }else if(k==='air'){
+      rect(a.x-11,y-18,22,23,'#afc9c7',4);rect(a.x-7,y-14,14,12,'#2a6e79',3);
+      line(a.x,y-18,a.x,y-25,'#cae7d9',2);circle(a.x,y-27,4,'#ffd98e');label('≋',a.x,y-8,10,'#daf9e7');
+    }else{
+      rect(a.x-13,y-5,25,9,'#53606c',4);rect(a.x-8,y-9,16,6,'#ac9291',2);
+      for(let n=0;n<3;n++)rect(a.x-7+n*5,y-4,2,7,'#d0d4c9');
+    }
+    circle(a.x,y-27+Math.sin(t*4+i)*3,11,'#fff4bd');label('!',a.x,y-27+Math.sin(t*4+i)*3,14,'#87694d');
+  }
+  function drawBeacon(b,t){
+    const safe=b.type==='garden', complete=!safe&&done(b.type), current=state.active===b.type;
+    const col=complete?'#a6f0aa':b.color,pulse=1+Math.sin(t*3+b.x)*.09;
+    glow(b.x,b.y-29,safe?65:74,safe?'rgba(172,247,161,0.26)':complete?'rgba(166,250,177,0.32)':b.type==='river'?'rgba(101,207,255,0.29)':b.type==='air'?'rgba(255,201,114,0.23)':'rgba(250,127,140,0.24)');
+    circle(b.x,b.y+2,24*pulse,`${col}26`);
+    ctx.strokeStyle=col+'99';ctx.lineWidth=2.3;ctx.beginPath();ctx.ellipse(b.x,b.y+4,28*pulse,9,0,0,Math.PI*2);ctx.stroke();
+    line(b.x,b.y,b.x,b.y-43,col,2);
+    ctx.save();ctx.translate(b.x,b.y-47+Math.sin(t*2.7+b.x)*5);ctx.rotate(Math.PI/4);
+    rect(-14,-14,28,28,col,6);rect(-9,-9,18,18,complete?'#377454':'#254a57',4);ctx.restore();
+    label(complete?'✓':safe?'✿':current?'★':b.icon,b.x,b.y-47+Math.sin(t*2.7+b.x)*5,17,'#ffffff');
+    label(complete?'HEALED':safe?'REST':b.type==='river'?'WATER':b.type==='air'?'AIR':'STORM',b.x,b.y+31,11,complete?'#b7eec0':'#e9fbfc');
+  }
+  function drawTinyCat(x,y,t){
+    const bob=Math.sin(t*2)*1.2;ctx.save();ctx.translate(x,y+bob);
+    ctx.fillStyle='#0d17234a';ctx.beginPath();ctx.ellipse(0,9,17,4,0,0,Math.PI*2);ctx.fill();
+    circle(0,0,11,'#f1b89c');poly([[-11,-5],[-10,-16],[-1,-10]],'#f1b89c');poly([[3,-10],[11,-16],[12,-3]],'#f1b89c');
+    circle(-4,-1,1.5,'#273b4c');circle(4,-1,1.5,'#273b4c');circle(0,3,1.4,'#c07679');
+    line(10,7,18,-2,'#f1b89c',4);ctx.restore();
+  }
+  function drawExtraCute(t){
+    const full=countDone()===3;
+    drawTinyCat(380,389,t);
+    for(const [x,y] of [[88,388],[460,387],[756,386]]){
+      rect(x-10,y-3,20,10,'#b27c78',3);rect(x-8,y-4,16,2,'#dbafa0');
+      if(full||done('river')){line(x,y-4,x,y-19,'#7fd5a3',2);circle(x-5,y-17,5,'#7ac395');circle(x+5,y-21,5,'#97dda7');circle(x,y-23,4,'#f5d6b0');}
+    }
+    if(done('air')){
+      // Solar roofs and low-pollution street planting show industrial progress.
+      for(const [x,y] of [[678,109],[808,124]]){rect(x,y,58,19,'#3f8295',4);for(let n=1;n<4;n++)line(x+n*14,y,x+n*14,y+19,'#a7d1cf',1);line(x,y+9,x+58,y+9,'#a7d1cf',1)}
+    }
+    if(done('storm')){
+      // Rain garden and repaired drain at the flood-prone west end.
+      rect(22,373,121,13,'#698e69',5);for(let i=0;i<8;i++){const x=27+i*15;circle(x,371,5,i%2?'#93d8a1':'#f0b5c0')}
+    }
+    if(full){for(let n=0;n<10;n++){const x=(n*107+32)%950,y=246+(n%3)*34;circle(x,y+Math.sin(t*1.3+n)*5,2.5,'#fff0bfbb')}}
+  }
+  function drawPlayer(t){
+    const p=state.player, walking=keys.size>0||touchKeys.size>0||state.clickTarget;
+    const bob=walking?Math.sin(t*12)*2.2:Math.sin(t*2)*1.2;
+    const hero=playableRoles[state.role];
+    ctx.save();ctx.translate(p.x,p.y+bob);
+    ctx.fillStyle='#0c192589';ctx.beginPath();ctx.ellipse(0,17,20,5,0,0,Math.PI*2);ctx.fill();
+    line(-7,10,-8,19,'#374352',6);line(7,10,8,19,'#374352',6);
+    rect(-16,-12,32,27,hero.color,9);
+    rect(-19,-9,7,20,'#53877f',4);rect(12,-7,6,13,'#638b8e',3);
+    line(-17,-5,-21,6,'#efc6aa',5);line(17,-5,20,6,'#efc6aa',5);
+    circle(0,-25,21,'#f2c7ab');
+    ctx.fillStyle=hero.hair;ctx.beginPath();ctx.arc(0,-29,21,Math.PI*1.03,Math.PI*2.05);ctx.lineTo(22,-24);ctx.lineTo(5,-42);ctx.lineTo(-12,-38);ctx.fill();
+    circle(-10,-19,4,'#f0a6ac66');circle(10,-19,4,'#f0a6ac66');
+    circle(-7,-26,3.1,'#293c45');circle(7,-26,3.1,'#293c45');circle(-6,-27,1.1,'#fff');circle(8,-27,1.1,'#fff');
+    ctx.strokeStyle='#8c6361';ctx.lineWidth=1.8;ctx.beginPath();ctx.arc(0,-21,3,0,Math.PI);ctx.stroke();
+    if(state.role==='engineer'){
+      rect(-20,-47,40,11,'#f3ce75',6);rect(-14,-53,28,14,'#f6d688',8);line(0,-50,0,-38,'#d4a258',2);
+      rect(-5,-3,10,11,'#315b65',3);rect(-4,-1,8,5,'#b2e0e2',1);
+    }else if(state.role==='doctor'){
+      rect(-10,-9,20,20,'#f7faf8',4);line(0,-9,0,11,'#98a8b4',2);rect(-4,-5,8,3,'#d97983',1);rect(-2,-8,4,9,'#d97983',1);
+      circle(12,1,4,'#7bc2d3');line(12,-4,12,-8,'#5e8d9d',2);
+    }else if(state.role==='policymaker'){
+      poly([[-5,-7],[0,6],[5,-7]],'#ecf0f8');poly([[-2,-5],[0,7],[3,-5]],'#a85a88');
+      rect(12,-2,12,10,'#e7e7d4',2);line(15,1,21,1,'#6b7b83',1);
+    }else if(state.role==='marketing'){
+      rect(16,-7,9,11,'#efbfdd',3);poly([[21,-8],[31,-12],[31,2],[21,0]],'#f3d7ad');line(27,2,31,6,'#efbfdd',2);
+      circle(-5,-43,3,'#f8c3de');
+    }else if(state.role==='student'){
+      rect(-20,-8,7,18,'#cfa5ea',4);rect(14,-8,7,18,'#cfa5ea',4);
+      rect(-10,-44,21,6,'#8cc0e4',3);
+    }else if(state.role==='volunteer'){
+      circle(10,-4,6,'#e8fff1');label('✿',10,-1,10,'#3e9569');rect(-9,-44,6,5,'#a5e7bb',2);
+    }else{
+      circle(0,1,8,'#264b54');circle(0,1,5,'#a5dae1');circle(0,1,2,'#284b64');rect(-10,-44,7,5,'#f6bdc5',3);
+    }
+    ctx.restore();
+  }
+  function drawEcho(t){if(state.screen!=='game')return;
+    const x=state.player.x+34,y=state.player.y-57+Math.sin(t*3)*6;
+    glow(x,y,45,'rgba(148,240,230,0.33)');circle(x,y,17,'#d2ffeb');circle(x,y,13,'#85d6d5');
+    rect(x-10,y-7,20,14,'#265d70',6);circle(x-5,y-1,3,'#e2fff1');circle(x+5,y-1,3,'#e2fff1');
+    line(x-4,y+7,x+4,y+7,'#e1fff1',1.5);line(x,y-18,x,y-26,'#9de9d5',2);circle(x,y-27,4,'#aaf3c4');
+    circle(x-20,y+10,3,'#a9f8f1');circle(x+20,y+5,3,'#a9f8f1');
+  }
+  function render(t){
+    ctx.clearRect(0,0,W,H);
+    drawSky(t);
+    drawBuilding(26,112,147,126,0,done('storm'));
+    drawBuilding(185,84,156,157,1,done('storm'));
+    drawBuilding(356,128,136,113,2,done('river'));
+    drawBuilding(511,105,126,136,3,done('river'));
+    drawBuilding(655,94,122,145,1,done('air'));
+    drawBuilding(794,108,144,133,2,done('air'));
+    drawStreet(t);drawRiver(t);drawProps(t);drawExtraCute(t);
+    if(state.active){const k=state.active,p=state.progress[k],z=zones[k];
+      if(p.phase==='clues')z.clues.forEach((c,i)=>drawClue(c,i,t,k));
+      if(p.phase==='action')z.actions.forEach((a,i)=>drawAction(a,i,t,k));
+    }
+    beacons.forEach(b=>drawBeacon(b,t));drawPlayer(t);drawEcho(t);
+    const vig=ctx.createRadialGradient(W/2,H/2,170,W/2,H/2,680);
+    vig.addColorStop(0,'#050f1f00');vig.addColorStop(1,countDone()===3?'#082b2633':'#05132370');ctx.fillStyle=vig;ctx.fillRect(0,0,W,H);
+    if(!countDone())rect(0,0,W,H,'#1a2f5a0a');
+  }
+  function frame(now){const dt=Math.min((now-lastFrame)/1000,.05);lastFrame=now;update(dt);render(state.time);requestAnimationFrame(frame)}
+
+  document.addEventListener('keydown',e=>{
+    const key=e.key.length===1?e.key.toLowerCase():e.key;
+    if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight',' ','e','w','a','s','d'].includes(key))e.preventDefault();
+    if(key==='e'&&!e.repeat&&state.screen==='game'&&!state.modal){interact();return;}
+    keys.add(key);
+  });
+  document.addEventListener('keyup',e=>keys.delete(e.key.length===1?e.key.toLowerCase():e.key));
+  window.addEventListener('blur',()=>{keys.clear();touchKeys.clear()});
+  canvas.addEventListener('pointerdown',e=>{
+    if(state.screen!=='game'||state.modal)return;
+    const r=canvas.getBoundingClientRect();const x=(e.clientX-r.left)/r.width*W,y=(e.clientY-r.top)/r.height*H;
+    state.clickTarget={x:clamp(x,29,931),y:clamp(y,251,395)};
+    if(getNearby()&&dist(state.player,{x,y})<58)interact();
+  });
+  document.querySelectorAll('[data-dir]').forEach(btn=>{
+    const dir=btn.dataset.dir;
+    btn.addEventListener('pointerdown',e=>{e.preventDefault();btn.setPointerCapture(e.pointerId);touchKeys.add(dir)});
+    const finish=()=>touchKeys.delete(dir);
+    btn.addEventListener('pointerup',finish);btn.addEventListener('pointercancel',finish);btn.addEventListener('lostpointercapture',finish);
+  });
+  $('interactTouch').onclick=interact;
+  $('instructionsBtn').onclick=showHelp;
+  $('resetBtn').onclick=()=>{if(confirm('Restart RE:GREEN 2050 from the beginning?'))resetState()};
+  $('logoLink').onclick=e=>{e.preventDefault();if(confirm('Return to main menu and restart?'))resetState()};
+  resetState();requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
